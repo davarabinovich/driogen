@@ -49,7 +49,7 @@ def main():
     main_win = MainWin(ui)
     content_gui = ContentGui(main_win)
 
-    AppSupervisorQt(main_win, SupervisedData, content_gui, EXTENSION, argv, write, read)
+    supervisor = AppSupervisorQt(main_win, SupervisedData, content_gui, EXTENSION, argv, write, read)
 
     main_win.show()
     app.exec()
