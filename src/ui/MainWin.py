@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file '.\src\ui\MainWin.ui'
+# Form implementation generated from reading ui file 'src\ui\MainWin.ui'
 #
 # Created by: PyQt6 UI code generator 6.9.1
 #
@@ -15,6 +15,10 @@ class Ui_MainWin(object):
         MainWin.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(parent=MainWin)
         self.centralwidget.setObjectName("centralwidget")
+        self.lineEdit = QtWidgets.QLineEdit(parent=self.centralwidget)
+        self.lineEdit.setEnabled(False)
+        self.lineEdit.setGeometry(QtCore.QRect(60, 50, 113, 21))
+        self.lineEdit.setObjectName("lineEdit")
         MainWin.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -27,7 +31,13 @@ class Ui_MainWin(object):
         MainWin.setStatusBar(self.statusbar)
         self.actionNew = QtGui.QAction(parent=MainWin)
         self.actionNew.setObjectName("actionNew")
+        self.actionOpen = QtGui.QAction(parent=MainWin)
+        self.actionOpen.setObjectName("actionOpen")
+        self.actionSave = QtGui.QAction(parent=MainWin)
+        self.actionSave.setObjectName("actionSave")
         self.menuFile.addAction(self.actionNew)
+        self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addAction(self.actionSave)
         self.menubar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWin)
@@ -37,4 +47,6 @@ class Ui_MainWin(object):
         _translate = QtCore.QCoreApplication.translate
         MainWin.setWindowTitle(_translate("MainWin", "MainWindow"))
         self.menuFile.setTitle(_translate("MainWin", "File"))
-        self.actionNew.setText(_translate("MainWin", "New..."))
+        self.actionNew.setText(_translate("MainWin", "New"))
+        self.actionOpen.setText(_translate("MainWin", "Open"))
+        self.actionSave.setText(_translate("MainWin", "Save"))

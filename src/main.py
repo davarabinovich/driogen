@@ -1,63 +1,57 @@
 
 from sys import argv
-from typing import Optional
-from PyQt6.QtCore import *
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from random import randint
+from PyQt6.QtWidgets import QApplication
+
+from lib.app_supervisor.app_supervisor_qt import *
+from ui_logic.ui_logic import *
 from ui.MainWin import *
+from file_processor.file_reader import *
+from file_processor.file_writer import *
 
 
 EXTENSION = '.dprj'
 
 
-class AppSupervisor(QObject):
-    def __init__(self, main_win: QMainWindow):
-        super().__init__(None)
-        self._main_win = main_win
-
-    @pyqtSlot()
-    def receive_save_as_action(self):
-        pass
-
-    needToSave = pyqtSignal(str, name='needToSave')
-
-    @pyqtSlot()
-    def receive_create_new(self):
-        file_url_tuple = QFileDialog.getSaveFileUrl(self._main_win,
-                                                    caption='Save Workflow Project',
-                                                    filter='Project (*{extension})'.format(extension=EXTENSION))
-        if file_url_tuple[0].isEmpty():
-            return False
-        file_path: str = file_url_tuple[0].toString().removeprefix('file:///')
-        if not file_path.endswith(EXTENSION):
-            file_path += EXTENSION
-
-        self.needToSave.emit(file_path)
-        return True
-
-
-class MainWin(QMainWindow):
+class MainWin(MainWinQt):
     def __init__(self, ui: Ui_MainWin):
-        super().__init__()
-        self._ui = ui
-        self._ui.setupUi(self)
+        super().__init__(ui)
+        self._ui.lineEdit.setVisible(False)
+        # self.new = self._ui.actionNew.triggered
+        self._ui.actionNew.triggered.connect(self.new)
+        self._ui.lineEdit.textChanged.connect(self.edit)
+        self._ui.actionSave.triggered.connect(self.save)
+        self._ui.actionOpen.triggered.connect(self.load)
 
     def resizeEvent(self, a0: Optional[QtGui.QResizeEvent]) -> None:
         pass
 
-    def closeEvent(self, a0: Optional[QtGui.QCloseEvent]) -> None:
-        pass
+
+class ContentGui(ContentGuiQt):
+    def __init__(self, parent: MainWin):
+        super().__init__(parent)
+        self._data: SupervisedData | None = None
+
+    def create_content(self):
+        self._data = SupervisedData('Test data object name', randint(0, 125))
+        self.parent._ui.lineEdit.setVisible(True)
+
+    def set_content(self, content: SupervisedData):
+        self._data = content
+
+    def get_content(self) -> SupervisedData:
+        return self._data
 
 
 def main():
     app = QApplication(argv)
     ui = Ui_MainWin()
-    win = MainWin(ui)
+    main_win = MainWin(ui)
+    content_gui = ContentGui(main_win)
 
-    app_supervisor = AppSupervisor(win)
-    ui.menuFile.triggered.connect(app_supervisor.receive_create_new)
-    app_supervisor.needToSave.connect(save)
+    AppSupervisorQt(main_win, SupervisedData, content_gui, EXTENSION, argv, write, read)
 
-    win.show()
+    main_win.show()
     app.exec()
     exit()
 
@@ -76,14 +70,6 @@ TEST_CONTENT = '''<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; W
   </diagram>
 </mxfile>
 '''
-
-
-@pyqtSlot(str)
-def save(file_path: str):
-    file = open(file_path, 'w')
-    file.write(TEST_CONTENT)
-    file.close()
-
 
 if __name__ == '__main__':
     main()

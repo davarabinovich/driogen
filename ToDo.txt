@@ -1,0 +1,9 @@
+
+- Add signal logic to Supervisor If
+- Deal with parents in QObject constructors
+- Make supervise thread-safe
+- Make signal.emit and connect recognizable
+- Make setupUi in AppSuo.MainWin recognizable
+- Check file content types
+- Simplify libs import directives
+- Make QMainWindow pluggable in main.py

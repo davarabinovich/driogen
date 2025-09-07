@@ -1,0 +1,8 @@
+[submodule "lib/forest"]
+	path = lib/forest
+	url = https://github.com/davarabinovich/Forest.git
+	branch = release
+[submodule "lib/app_supervisor"]
+	path = lib/app_supervisor
+	url = https://github.com/davarabinovich/app_supervisor.git
+	branch = release

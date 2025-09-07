@@ -1,6 +1,6 @@
 
 import lib.forest.tree as forest
-from logic_item import *
+from src.logic.logic_item import *
 
 
 class NotPhysicalProduction(Exception):

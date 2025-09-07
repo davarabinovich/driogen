@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/driogen.iml" filepath="$PROJECT_DIR$/.idea/driogen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../PTS/power_tree_solver/.idea/power_tree_solver.iml" filepath="$PROJECT_DIR$/../PTS/power_tree_solver/.idea/power_tree_solver.iml" />
     </modules>
   </component>
 </project>
