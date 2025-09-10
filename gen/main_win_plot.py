@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'src\ui\MainWin.ui'
+# Form implementation generated from reading ui file 'src\ui\main_win\main_win.ui'
 #
 # Created by: PyQt6 UI code generator 6.9.1
 #
@@ -12,13 +12,10 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWin(object):
     def setupUi(self, MainWin):
         MainWin.setObjectName("MainWin")
+        MainWin.setEnabled(True)
         MainWin.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(parent=MainWin)
         self.centralwidget.setObjectName("centralwidget")
-        self.lineEdit = QtWidgets.QLineEdit(parent=self.centralwidget)
-        self.lineEdit.setEnabled(False)
-        self.lineEdit.setGeometry(QtCore.QRect(60, 50, 113, 21))
-        self.lineEdit.setObjectName("lineEdit")
         MainWin.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWin)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))

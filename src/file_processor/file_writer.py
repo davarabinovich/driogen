@@ -1,8 +1,6 @@
 
-from src.ui_logic.ui_logic import *
+from src.app_logic.app_logic_qt import *
 
 
-def write(content: SupervisedData, file_name: str):
-    with open(file_name, 'w') as file:
-        file.write(content.name)
-        file.write(str(content.value))
+def write(content: PrjWorkflow, file_name: str):
+    pass

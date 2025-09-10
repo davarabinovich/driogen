@@ -1,11 +1,6 @@
 
-from src.ui_logic.ui_logic import *
+from src.app_logic.app_logic_qt import *
 
 
-def read(fil_name: str) -> SupervisedData:
-    with open(fil_name, 'r') as file:
-        file_content = file.read()
-        name: str = file_content[0]
-        value: int = int(file_content[1])
-        data = SupervisedData(name, value)
-        return data
+def read(fil_name: str) -> PrjWorkflow:
+    pass

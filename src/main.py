@@ -2,54 +2,24 @@
 from sys import argv
 from random import randint
 from PyQt6.QtWidgets import QApplication
-
 from lib.app_supervisor.app_supervisor_qt import *
-from ui_logic.ui_logic import *
-from ui.MainWin import *
+
+from logic.logic_workflow import *
+from app_logic.app_logic_qt import *
 from file_processor.file_reader import *
 from file_processor.file_writer import *
-
+from ui.main_win.main_win import *
+from ui.item_creation_dialog.item_creation_dialog import *
 
 EXTENSION = '.dprj'
 
 
-class MainWin(MainWinQt):
-    def __init__(self, ui: Ui_MainWin):
-        super().__init__(ui)
-        self._ui.lineEdit.setVisible(False)
-        # self.new = self._ui.actionNew.triggered
-        self._ui.actionNew.triggered.connect(self.new)
-        self._ui.lineEdit.textChanged.connect(self.edit)
-        self._ui.actionSave.triggered.connect(self.save)
-        self._ui.actionOpen.triggered.connect(self.load)
-
-    def resizeEvent(self, a0: Optional[QtGui.QResizeEvent]) -> None:
-        pass
-
-
-class ContentGui(ContentGuiQt):
-    def __init__(self, parent: MainWin):
-        super().__init__(parent)
-        self._data: SupervisedData | None = None
-
-    def create_content(self):
-        self._data = SupervisedData('Test data object name', randint(0, 125))
-        self.parent._ui.lineEdit.setVisible(True)
-
-    def set_content(self, content: SupervisedData):
-        self._data = content
-
-    def get_content(self) -> SupervisedData:
-        return self._data
-
-
 def main():
     app = QApplication(argv)
-    ui = Ui_MainWin()
-    main_win = MainWin(ui)
-    content_gui = ContentGui(main_win)
+    main_win = MainWin()
+    content_gui = WorkflowControllerQt(main_win)
 
-    supervisor = AppSupervisorQt(main_win, SupervisedData, content_gui, EXTENSION, argv, write, read)
+    supervisor = AppSupervisorQt(main_win, PrjWorkflow, content_gui, EXTENSION, argv, write, read)
 
     main_win.show()
     app.exec()

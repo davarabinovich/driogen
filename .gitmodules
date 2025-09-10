@@ -5,4 +5,4 @@
 [submodule "lib/app_supervisor"]
 	path = lib/app_supervisor
 	url = https://github.com/davarabinovich/app_supervisor.git
-	branch = release
+	branch = release_qt
